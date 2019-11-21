@@ -1,0 +1,15 @@
+[Unit]
+Description=ntpd - reference implementation of ntp
+After=network.target auditd.service
+
+[Service]
+EnvironmentFile=-/etc/default/ntp
+ExecStart=/usr/sbin/ntpd -n $NTPD_OPTS -c /etc/ntp.conf
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=ntpd.service
+
