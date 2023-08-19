@@ -7,7 +7,11 @@
 
   - copy: src=ntp.service dest=/lib/systemd/system/ owner=root mode=0644
 
-  - systemd: name=systemd-timesyncd.service enabled=no state=stopped
+  - systemd:
+      name: systemd-timesyncd.service
+      enabled: no
+      state: stopped
+    ignore_errors: yes
 
   - systemd: name=ntp.service  enabled=yes state=restarted
 
